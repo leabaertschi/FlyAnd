@@ -57,6 +57,31 @@ a img {
     text-transform: uppercase;
 }
 
+.navi {
+    height: 40px;
+    background-color: #eeeeee;
+    margin: 0 20px;
+}
+
+.navi ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navi ul li {
+    display: block;
+    float: left;
+    line-height: 35px;
+    padding: 5px 20px;
+    font-size: 1.4em;
+    color: #999999;
+}
+
+.navi ul li.active {
+    color: black;
+}
+
 .footer {
     color: gray;
     padding: 5px;

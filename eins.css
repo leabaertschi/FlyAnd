@@ -64,7 +64,38 @@ a img {
 }
 
 .content h1{
-    text-transform: uppercase;
+    line-height: 1.2em;
+    font-size: 1.7em;
+}
+
+.content > div {
+    margin-bottom: 30px;
+}
+
+.navi {
+    height: 40px;
+    background-color: #eeeeee;
+    border: 1px solid #cccccc;
+    border-bottom: none;
+}
+
+.navi ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navi ul li {
+    display: block;
+    float: left;
+    line-height: 35px;
+    padding: 5px 20px;
+    font-size: 1.4em;
+    color: #999999;
+}
+
+.navi ul li.active {
+    color: black;
 }
 
 .footer {
