@@ -51,7 +51,8 @@ body {
 
 .content {
     background-color: #ffffff;
-    height: 500px;
+    min-height: 550px;
+    height:expression(this.scrollHeight > 550 ? "auto":"550px");
     border-radius: 0 0 10px 10px;
     -moz-border-radius: 0 0 10px 10px;
     border: 1px solid #cccccc;
