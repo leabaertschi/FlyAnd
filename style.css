@@ -7,6 +7,10 @@ body {
   	margin:0;
 }
 
+a {
+    text-decoration: none;
+}
+
 a img {
     border: none;
 }
@@ -90,11 +94,14 @@ a img {
     float: left;
     line-height: 35px;
     padding: 5px 20px;
+}
+
+.navi ul li a {
     font-size: 1.4em;
     color: #999999;
 }
 
-.navi ul li.active {
+.navi ul li.active a {
     color: black;
 }
 
