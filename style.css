@@ -106,6 +106,10 @@ a img {
     color: black;
 }
 
+.navi ul .contact {
+    float: right;
+}
+
 .footer {
     color: gray;
     padding: 5px;
