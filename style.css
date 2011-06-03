@@ -17,7 +17,7 @@ a img {
 }
 
 #content {
-    width: 1100px;
+    width: 1097px;
 	padding: 0;
     margin: 0 auto;
 }
@@ -29,7 +29,6 @@ a img {
 #right {
     float: right;
     width: 200px;
-/*    padding-top: 5px;*/
 }
 
 #right .flyer {
@@ -51,20 +50,16 @@ a img {
 }
 
 .logo {
-    border-radius: 10px 10px 0 0;
-    -moz-border-radius: 10px 10px 0 0;
-    background-image: url(img/logo1.jpg);
-    background-color: #cceeff;
+    background-image: url(img/logo1_rounded.jpg);
+    background-repeat: no-repeat;
     height: 150px;
 }
 
 .content {
-    background-color: #ffffff;
     min-height: 550px;
     height:expression(this.scrollHeight > 550 ? "auto":"550px");
-    border-radius: 0 0 10px 10px;
-    -moz-border-radius: 0 0 10px 10px;
     border: 1px solid #cccccc;
+    border-bottom: none;
     padding: 20px 20px;
 }
 
@@ -75,6 +70,11 @@ a img {
 
 .content > div {
     margin-bottom: 30px;
+}
+
+.content_bottom {
+    background: url(img/border_bottom.png) no-repeat;
+    height: 13px;
 }
 
 .navi {
