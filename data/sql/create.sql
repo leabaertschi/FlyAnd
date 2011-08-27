@@ -4,12 +4,14 @@
 
 CREATE TABLE `film` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `clip_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `type` enum('vimeo','youtube','facebook') CHARACTER SET utf8 NOT NULL,
+  `direct_url` varchar(255) CHARACTER SET utf8 NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `name_1` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `name_2` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Structure for table `vote`

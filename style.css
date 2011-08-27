@@ -118,3 +118,18 @@ a img {
 .conditions li {
     padding-bottom: 10px;
 }
+
+table.voting td {
+    padding-left: 10px;
+    vertical-align: top;
+}
+
+.voting .title {
+    font-size: 1.2em;
+    padding: 5px 0 5px 0;
+}
+
+.voting .name {
+    font-size: .9em;
+/*    color: #999999;*/
+}

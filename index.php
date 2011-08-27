@@ -19,7 +19,7 @@ $app->register(new Silex\Extension\TwigExtension(), array(
 // doctrine
 if ($env == 'prod') {
     $dbOptions = array(
-        'driver' => 'pdo_mysqli',
+        'driver' => 'pdo_mysql',
         'host' => '',
         'user' => '',
         'password' => '',
@@ -27,7 +27,7 @@ if ($env == 'prod') {
     );
 } else {
     $dbOptions = array(
-        'driver' => 'pdo_mysqli',
+        'driver' => 'pdo_mysql',
         'host' => 'localhost',
         'user' => 'fly_and',
         'password' => 'cn3WExfHS5zReTQR',
@@ -48,7 +48,14 @@ $app->get('/', function() use ($app) {
 
 // competition
 $app->get('/wettbewerb', function() use ($app) {
-    return $app['twig']->render('wettbewerb.twig');
+    return $app['twig']->render('competition.twig');
+});
+
+// voting
+$app->get('/abstimmen', function() use ($app) {
+    $sql = "SELECT * FROM film";
+    $films = $app['db']->fetchAll($sql);
+    return $app['twig']->render('voting.twig', array('films' => $films));
 });
 
 $app->run();
