@@ -1,5 +1,5 @@
-Action php /cgi-php53/php
-AddHandler php53 .php
+#Action php /cgi-php53/php
+#AddHandler php53 .php
 
 <IfModule mod_rewrite.c>
     Options -MultiViews

@@ -16,6 +16,10 @@
             {% include "navigation.twig" %}
         </div>
         <div class="content">
+            {# Flash message #}
+            {% for type, flash in app.session.getFlashes() %}
+                <div class="{{ type }}">{{ flash }}</div>
+            {% endfor %}
             {% block content %}
             {% endblock %}
         </div>

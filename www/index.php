@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/vendor/silex.phar';
+require_once __DIR__.'/../vendor/silex.phar';
 
 $env = 'dev';
 if (preg_match('/fly-and\.ch/', $_SERVER['HTTP_HOST'])){
@@ -10,10 +10,13 @@ if (preg_match('/fly-and\.ch/', $_SERVER['HTTP_HOST'])){
 $app = new Silex\Application();
 $app['debug'] = $env == 'dev';
 
+// session
+$app->register(new Silex\Extension\SessionExtension());
+
 // twig
 $app->register(new Silex\Extension\TwigExtension(), array(
-    'twig.path'       => __DIR__.'/views',
-    'twig.class_path' => __DIR__.'/vendor/twig/lib',
+    'twig.path'       => __DIR__.'/../views',
+    'twig.class_path' => __DIR__.'/../vendor/twig/lib',
 ));
 
 // doctrine
@@ -37,8 +40,8 @@ if ($env == 'prod') {
 
 $app->register(new Silex\Extension\DoctrineExtension(), array(
     'db.options'            => $dbOptions,
-    'db.dbal.class_path'    => __DIR__.'/vendor/doctrine-dbal/lib',
-    'db.common.class_path'  => __DIR__.'/vendor/doctrine-common/lib',
+    'db.dbal.class_path'    => __DIR__.'/../vendor/doctrine-dbal/lib',
+    'db.common.class_path'  => __DIR__.'/../vendor/doctrine-common/lib',
 ));
 
 // home
@@ -56,6 +59,17 @@ $app->get('/abstimmen', function() use ($app) {
     $sql = "SELECT * FROM film";
     $films = $app['db']->fetchAll($sql);
     return $app['twig']->render('voting.twig', array('films' => $films));
+});
+
+$app->post('/stimmen', function() use ($app) {
+    $filmId = $app['request']->get('film');
+    if (!$filmId) {
+        $app['session']->setFlash('error', 'Bitte wähle einen Film aus');
+    } else {
+        // TODO: save vote to db
+        $app['session']->setFlash('success', 'Danke für deine Stimme');
+    }
+    return $app->redirect('/abstimmen');
 });
 
 $app->run();
