@@ -23,23 +23,7 @@ $app->register(new Silex\Extension\TwigExtension(), array(
 ));
 
 // doctrine
-if ($env == 'prod') {
-    $dbOptions = array(
-        'driver' => 'pdo_mysql',
-        'host' => '',
-        'user' => '',
-        'password' => '',
-        'dbname' => 'fly_and_film',
-    );
-} else {
-    $dbOptions = array(
-        'driver' => 'pdo_mysql',
-        'host' => 'localhost',
-        'user' => 'fly_and',
-        'password' => 'cn3WExfHS5zReTQR',
-        'dbname' => 'fly_and_film',
-    );
-}
+require_once __DIR__.'/../data/db.php';
 
 $app->register(new Silex\Extension\DoctrineExtension(), array(
     'db.options'            => $dbOptions,
