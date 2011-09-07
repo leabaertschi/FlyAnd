@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__.'/../vendor/silex.phar';
+require_once __DIR__.'/../vendor/recaptcha-php/recaptchalib.php';
 
 $env = 'dev';
 if (preg_match('/fly-and\.ch/', $_SERVER['HTTP_HOST'])){
@@ -9,6 +10,8 @@ if (preg_match('/fly-and\.ch/', $_SERVER['HTTP_HOST'])){
 
 $app = new Silex\Application();
 $app['debug'] = $env == 'dev';
+$app['rc_public_key'] = '6Leh4ccSAAAAAMi846x5jbZgW9JfYwjunELh82bv';
+$app['rc_private_key'] = '6Leh4ccSAAAAACXTE2QJaFb9lZah919yzlbL8GyK';
 
 // session
 $app->register(new Silex\Extension\SessionExtension());
@@ -58,18 +61,57 @@ $app->get('/wettbewerb', function() use ($app) {
 $app->get('/abstimmen', function() use ($app) {
     $sql = "SELECT * FROM film";
     $films = $app['db']->fetchAll($sql);
-    return $app['twig']->render('voting.twig', array('films' => $films));
+    $showResults = false;
+    $votes = array();
+    if ($showResults) {
+        $sql = "SELECT film_id, (SELECT count(*) FROM vote) AS total, count(film_id) AS byFilm
+                FROM vote
+                GROUP BY film_id";
+        $rawVotes = $app['db']->fetchAll($sql);
+        foreach ($rawVotes as $vote) {
+            $votes[$vote['film_id']] = round($vote['byFilm'] / $vote['total'] * 100);
+        }
+    }
+    return $app['twig']->render('voting.twig', array(
+            'films' => $films,
+            'rc_code' => recaptcha_get_html($app['rc_public_key']),
+            'selectedFilm' => $app['request']->get('film'),
+            'votes' => $votes
+        ));
 });
 
 $app->post('/stimmen', function() use ($app) {
+    $get = '';
     $filmId = $app['request']->get('film');
     if (!$filmId) {
         $app['session']->setFlash('error', 'Bitte wähle einen Film aus');
     } else {
-        // TODO: save vote to db
-        $app['session']->setFlash('success', 'Danke für deine Stimme');
+        if (!checkCaptcha($app['rc_private_key'])) {
+            $app['session']->setFlash('error', 'Deine Stimme konnte nicht gezählt werden.
+                                                Hast du die Kontrollwörter korrekt eingegeben?');
+            $get = '?film='.$filmId;
+        } else {
+            $sql = "INSERT INTO vote (film_id) VALUES (?)";
+            try {
+                $app['db']->executeQuery($sql, array((int)$filmId));
+                $app['session']->setFlash('success', 'Danke für deine Stimme');
+            } catch (Exception $e) {
+                $app['session']->setFlash('error', 'Deine Stimme konnte nicht gezählt werden.
+                                                    Bitte versuche es nochmals oder melde dich bei uns.');
+            }
+        }
     }
-    return $app->redirect('/abstimmen');
+    return $app->redirect('/abstimmen'.$get);
 });
+
+function checkCaptcha($privateKey) {
+    $resp = recaptcha_check_answer (
+        $privateKey,
+        $_SERVER["REMOTE_ADDR"],
+        $_POST["recaptcha_challenge_field"],
+        $_POST["recaptcha_response_field"]);
+
+    return $resp->is_valid;
+}
 
 $app->run();

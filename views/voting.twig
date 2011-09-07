@@ -35,12 +35,21 @@
                         <div class="name">{{ film.name_2 }}</div>
                     </td>
                     <td class="radio">
-                        <input type="radio" name="film" value="{{ film.id }}" />
-                        <label for="film">Diesen Film wählen</label>
+                        {% if votes %}
+                            Stimmen: {% if votes[film.id] %}{{ votes[film.id] }}{%else%}0{% endif %}%
+                        {% else %}
+                            <input type="radio"
+                                   name="film"
+                                   value="{{ film.id }}"
+                                   {% if selectedFilm and selectedFilm == film.id %}checked="checked"{% endif %} />
+                            <label for="film">Diesen Film wählen</label>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
             </table>
+            <div class="captcha">{{ rc_code | raw }}</div>
+            <div class="clear"></div>
             <div class="sendVote">
                 <div id="selectError" class="error hidden">Bitte wähle einen Film aus</div>
                 <a id="voteBtn" href="#">Abstimmen</a>

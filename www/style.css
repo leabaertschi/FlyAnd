@@ -131,12 +131,19 @@ table.voting td {
 
 .voting .name {
     font-size: .9em;
-/*    color: #999999;*/
+}
+
+.captcha {
+    padding: 50px 20px 0 0;
+}
+
+#recaptcha_widget_div {
+    float: right;
 }
 
 .sendVote {
-    padding: 50px 20px 0 0;
     text-align: right;
+    padding: 20px 20px 0 0;
 }
 
 .sendVote a {
