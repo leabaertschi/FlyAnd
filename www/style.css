@@ -165,6 +165,10 @@ table.voting td {
     padding-left: 50px;
 }
 
+.voteResult {
+    display: none;
+}
+
 .error {
     color: #FF0000;
 }

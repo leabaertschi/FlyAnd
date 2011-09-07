@@ -35,15 +35,16 @@
                         <div class="name">{{ film.name_2 }}</div>
                     </td>
                     <td class="radio">
-                        {% if votes %}
+                        <div class="voteResult">
                             Stimmen: {% if votes[film.id] %}{{ votes[film.id] }}{%else%}0{% endif %}%
-                        {% else %}
+                        </div>
+                        <div class="voteRadio">
                             <input type="radio"
                                    name="film"
                                    value="{{ film.id }}"
                                    {% if selectedFilm and selectedFilm == film.id %}checked="checked"{% endif %} />
                             <label for="film">Diesen Film wählen</label>
-                        {% endif %}
+                        </div>
                     </td>
                 </tr>
             {% endfor %}

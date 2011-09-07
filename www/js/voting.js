@@ -3,7 +3,7 @@
 
 var flyAnd = {};
 (function(flyAnd){
-    var init;
+    var init, checkVoted, setVoted, showResults, getCookie;
 
     init = function() {
         var radios;
@@ -13,7 +13,7 @@ var flyAnd = {};
             $('html,body')
                 .animate({scrollTop: $(document).height()}, 1000);
         });
-
+        // send form if film selected
         $('#voteBtn').click(function(e){
             e.preventDefault();
             var oneSelected = false;
@@ -29,6 +29,55 @@ var flyAnd = {};
                 $('#votingForm').submit();
             }
         });
+        // add item to localstorage if just voted
+        setVoted();
+        // check if this user already voted
+        checkVoted();
+    };
+
+    setVoted = function() {
+        if ('Danke für deine Stimme' == $('.success').text()
+            && typeof(localStorage) != 'undefined') {
+            localStorage.setItem('fafv', "1");
+        }
+    };
+
+    checkVoted = function() {
+        if (typeof(localStorage) != 'undefined') {
+            if (localStorage.getItem('fafv')) {
+                document.cookie = 'fafv=1';
+                showResults();
+                return;
+            }
+        }
+        if (getCookie('fafv')) {
+            console.log('cookie');
+            showResults();
+        }
+    };
+
+    showResults = function() {
+        $('.voteRadio').remove();
+        $('.voteResult').show();
+        $('.captcha').remove();
+        $('.sendVote').remove();
+    };
+
+    /*
+     * Source http://www.w3schools.com/js/js_cookies.asp
+     */
+    getCookie = function (c_name) {
+        var i,x,y,ARRcookies=document.cookie.split(";");
+        for (i=0;i<ARRcookies.length;i++)
+        {
+            x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+            y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+            x=x.replace(/^\s+|\s+$/g,"");
+            if (x==c_name)
+            {
+                return unescape(y);
+            }
+        }
     };
 
     init();

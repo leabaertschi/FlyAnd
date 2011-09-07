@@ -61,16 +61,13 @@ $app->get('/wettbewerb', function() use ($app) {
 $app->get('/abstimmen', function() use ($app) {
     $sql = "SELECT * FROM film";
     $films = $app['db']->fetchAll($sql);
-    $showResults = false;
     $votes = array();
-    if ($showResults) {
-        $sql = "SELECT film_id, (SELECT count(*) FROM vote) AS total, count(film_id) AS byFilm
-                FROM vote
-                GROUP BY film_id";
-        $rawVotes = $app['db']->fetchAll($sql);
-        foreach ($rawVotes as $vote) {
-            $votes[$vote['film_id']] = round($vote['byFilm'] / $vote['total'] * 100);
-        }
+    $sql = "SELECT film_id, (SELECT count(*) FROM vote) AS total, count(film_id) AS byFilm
+            FROM vote
+            GROUP BY film_id";
+    $rawVotes = $app['db']->fetchAll($sql);
+    foreach ($rawVotes as $vote) {
+        $votes[$vote['film_id']] = round($vote['byFilm'] / $vote['total'] * 100);
     }
     return $app['twig']->render('voting.twig', array(
             'films' => $films,
@@ -95,6 +92,7 @@ $app->post('/stimmen', function() use ($app) {
             try {
                 $app['db']->executeQuery($sql, array((int)$filmId));
                 $app['session']->setFlash('success', 'Danke für deine Stimme');
+                setcookie('fafv', 1);
             } catch (Exception $e) {
                 $app['session']->setFlash('error', 'Deine Stimme konnte nicht gezählt werden.
                                                     Bitte versuche es nochmals oder melde dich bei uns.');
