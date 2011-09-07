@@ -126,7 +126,7 @@ table.voting td {
 
 .voting .title {
     font-size: 1.2em;
-    padding: 5px 0 5px 0;
+    padding-bottom: 5px;
 }
 
 .voting .name {
@@ -148,6 +148,14 @@ table.voting td {
     width: 100px;
     float: right;
     text-align: center;
+}
+
+.voting label {
+    font-size: .8em;
+}
+
+.voting .radio {
+    padding-left: 50px;
 }
 
 .error {

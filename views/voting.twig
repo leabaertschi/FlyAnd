@@ -10,18 +10,18 @@
                     <td>
                         {% if film.type == 'vimeo' %}
                             <iframe src="http://player.vimeo.com/video/{{ film.clip_id }}?title=0&amp;byline=0&amp;portrait=0&amp;autoplay=0"
-                                    width="398" height="224" frameborder="0"></iframe>
+                                    width="300" height="170" frameborder="0"></iframe>
                         {% elseif film.type == 'youtube' %}
-                            <iframe width="398" height="320"
+                            <iframe width="300" height="250"
                                     src="http://www.youtube.com/embed/{{ film.clip_id }}"
                                     frameborder="0" allowfullscreen></iframe>
                         {% elseif film.type == 'facebook' %}
-                            <object width="398" height="300" >
+                            <object width="300" height="230" >
                                 <param name="allowfullscreen" value="true" />
                                 <param name="allowscriptaccess" value="always" />
                                 <param name="movie" value="http://www.facebook.com/v/{{ film.clip_id }}" />
                                 <embed src="http://www.facebook.com/v/{{ film.clip_id }}" type="application/x-shockwave-flash"
-                                allowscriptaccess="always" allowfullscreen="true" width="398" height="300">
+                                allowscriptaccess="always" allowfullscreen="true" width="300" height="230">
                                 </embed>
                             </object>
                         {% else %}
@@ -34,8 +34,9 @@
                         <div class="name">{{ film.name_1 }}</div>
                         <div class="name">{{ film.name_2 }}</div>
                     </td>
-                    <td>
+                    <td class="radio">
                         <input type="radio" name="film" value="{{ film.id }}" />
+                        <label for="film">Diesen Film wählen</label>
                     </td>
                 </tr>
             {% endfor %}
