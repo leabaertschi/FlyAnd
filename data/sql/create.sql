@@ -11,7 +11,7 @@ CREATE TABLE `film` (
   `name_1` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `name_2` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Structure for table `vote`

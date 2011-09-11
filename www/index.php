@@ -45,6 +45,11 @@ $app->get('/wettbewerb', function() use ($app) {
 $app->get('/abstimmen', function() use ($app) {
     $sql = "SELECT * FROM film";
     $films = $app['db']->fetchAll($sql);
+    foreach ($films as $index => $film ) {
+        foreach ($film as $field => $value) {
+            $films[$index][$field] = utf8_encode($value);
+        }
+    }
     $votes = array();
     $sql = "SELECT film_id, (SELECT count(*) FROM vote) AS total, count(film_id) AS byFilm
             FROM vote
