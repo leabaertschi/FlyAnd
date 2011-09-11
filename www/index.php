@@ -43,20 +43,23 @@ $app->get('/wettbewerb', function() use ($app) {
 
 // voting
 $app->get('/abstimmen', function() use ($app) {
-    $sql = "SELECT * FROM film";
-    $films = $app['db']->fetchAll($sql);
-    foreach ($films as $index => $film ) {
-        foreach ($film as $field => $value) {
-            $films[$index][$field] = utf8_encode($value);
+    $votes = $films = array();
+    if (time() >= strtotime('15.9.2011 00:00:00')
+        && time() <= strtotime('22.9.2011 23:59:59')) {
+        $sql = "SELECT * FROM film";
+        $films = $app['db']->fetchAll($sql);
+        foreach ($films as $index => $film ) {
+            foreach ($film as $field => $value) {
+                $films[$index][$field] = utf8_encode($value);
+            }
         }
-    }
-    $votes = array();
-    $sql = "SELECT film_id, (SELECT count(*) FROM vote) AS total, count(film_id) AS byFilm
-            FROM vote
-            GROUP BY film_id";
-    $rawVotes = $app['db']->fetchAll($sql);
-    foreach ($rawVotes as $vote) {
-        $votes[$vote['film_id']] = round($vote['byFilm'] / $vote['total'] * 100);
+        $sql = "SELECT film_id, (SELECT count(*) FROM vote) AS total, count(film_id) AS byFilm
+                FROM vote
+                GROUP BY film_id";
+        $rawVotes = $app['db']->fetchAll($sql);
+        foreach ($rawVotes as $vote) {
+            $votes[$vote['film_id']] = round($vote['byFilm'] / $vote['total'] * 100);
+        }
     }
     return $app['twig']->render('voting.twig', array(
             'films' => $films,
