@@ -2,9 +2,10 @@ Action php /cgi-php53/php
 AddHandler php53 .php
 
 <IfModule mod_rewrite.c>
-    Options -MultiViews
+#    Options -MultiViews
 
     RewriteEngine On
+#    RewriteBase /html/flyand
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ index.php [QSA,L]
 </IfModule>

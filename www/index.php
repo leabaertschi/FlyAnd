@@ -80,9 +80,9 @@ $app->post('/stimmen', function() use ($app) {
                                                 Hast du die Kontrollwörter korrekt eingegeben?');
             $get = '?film='.$filmId;
         } else {
-            $sql = "INSERT INTO vote (film_id) VALUES (?)";
+            $sql = "INSERT INTO vote (film_id, ip) VALUES (?, ?)";
             try {
-                $app['db']->executeQuery($sql, array((int)$filmId));
+                $app['db']->executeQuery($sql, array((int)$filmId, (string)$_SERVER['REMOTE_ADDR']));
                 $app['session']->setFlash('success', 'Danke für deine Stimme');
                 setcookie('fafv', 1);
             } catch (Exception $e) {
