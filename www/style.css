@@ -165,7 +165,7 @@ table.voting td {
     padding-left: 50px;
 }
 
-.voteResult {
+.voteResult, .voteRadio {
     display: none;
 }
 

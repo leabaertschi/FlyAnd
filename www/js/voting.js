@@ -3,7 +3,7 @@
 
 var flyAnd = {};
 (function(flyAnd){
-    var init, checkVoted, setVoted, showResults, getCookie;
+    var init, checkVoted, setVoted, showResults, getCookie, ec;
 
     init = function() {
         var radios;
@@ -29,6 +29,7 @@ var flyAnd = {};
                 $('#votingForm').submit();
             }
         });
+        ec = new evercookie();
         // add item to localstorage if just voted
         setVoted();
         // check if this user already voted
@@ -36,24 +37,24 @@ var flyAnd = {};
     };
 
     setVoted = function() {
-        if ('Danke für deine Stimme' == $('.success').text()
-            && typeof(localStorage) != 'undefined') {
-            localStorage.setItem('fafv', "1");
+        if ('Danke für deine Stimme' == $('.success').text()) {
+            ec.set('fafv', "1");
         }
     };
 
     checkVoted = function() {
-        if (typeof(localStorage) != 'undefined') {
-            if (localStorage.getItem('fafv')) {
-                document.cookie = 'fafv=1';
+        ec.get('fafv', function(value){
+            if (value === "1") {
                 showResults();
-                return;
+            } else {
+                showRadios();
             }
-        }
-        if (getCookie('fafv')) {
-            console.log('cookie');
-            showResults();
-        }
+        });
+    };
+
+    showRadios = function() {
+        $('.voteRadio').show();
+        $('.voteResult').remove();
     };
 
     showResults = function() {
