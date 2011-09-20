@@ -47,7 +47,11 @@ var flyAnd = {};
             if (value === "1") {
                 showResults();
             } else {
-                showRadios();
+                if ($('.voteRadio').size()) {
+                    showRadios();
+                } else {
+                    showResults();
+                }
             }
         });
     };

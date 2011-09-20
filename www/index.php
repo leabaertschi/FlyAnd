@@ -44,8 +44,7 @@ $app->get('/wettbewerb', function() use ($app) {
 // voting
 $app->get('/abstimmen', function() use ($app) {
     $votes = $films = array();
-    if (time() >= strtotime('15.9.2011 00:00:00')
-        && time() <= strtotime('22.9.2011 23:59:59')) {
+    if (time() >= strtotime('15.9.2011 00:00:00')) {
         $sql = "SELECT * FROM film";
         $films = $app['db']->fetchAll($sql);
         foreach ($films as $index => $film ) {
@@ -65,31 +64,36 @@ $app->get('/abstimmen', function() use ($app) {
             'films' => $films,
             'rc_code' => recaptcha_get_html($app['rc_public_key']),
             'selectedFilm' => $app['request']->get('film'),
-            'votes' => $votes
+            'votes' => $votes,
+            'over' => (time() > strtotime('22.9.2011 23:59:59'))
         ));
 });
 
 $app->post('/stimmen', function() use ($app) {
-    $get = '';
-    $filmId = $app['request']->get('film');
-    if (!$filmId) {
-        $app['session']->setFlash('error', 'Bitte wähle einen Film aus');
-    } else {
-        if (!checkCaptcha($app['rc_private_key'])) {
-            $app['session']->setFlash('error', 'Deine Stimme konnte nicht gezählt werden.
-                                                Hast du die Kontrollwörter korrekt eingegeben?');
-            $get = '?film='.$filmId;
+    if (time() <= strtotime('22.9.2011 23:59:59')) {
+        $get = '';
+        $filmId = $app['request']->get('film');
+        if (!$filmId) {
+            $app['session']->setFlash('error', 'Bitte wähle einen Film aus');
         } else {
-            $sql = "INSERT INTO vote (film_id, ip) VALUES (?, ?)";
-            try {
-                $app['db']->executeQuery($sql, array((int)$filmId, (string)$_SERVER['REMOTE_ADDR']));
-                $app['session']->setFlash('success', 'Danke für deine Stimme');
-                setcookie('fafv', 1);
-            } catch (Exception $e) {
+            if (!checkCaptcha($app['rc_private_key'])) {
                 $app['session']->setFlash('error', 'Deine Stimme konnte nicht gezählt werden.
-                                                    Bitte versuche es nochmals oder melde dich bei uns.');
+                                                    Hast du die Kontrollwörter korrekt eingegeben?');
+                $get = '?film='.$filmId;
+            } else {
+                $sql = "INSERT INTO vote (film_id, ip) VALUES (?, ?)";
+                try {
+                    $app['db']->executeQuery($sql, array((int)$filmId, (string)$_SERVER['REMOTE_ADDR']));
+                    $app['session']->setFlash('success', 'Danke für deine Stimme');
+                    setcookie('fafv', 1);
+                } catch (Exception $e) {
+                    $app['session']->setFlash('error', 'Deine Stimme konnte nicht gezählt werden.
+                                                        Bitte versuche es nochmals oder melde dich bei uns.');
+                }
             }
         }
+    } else {
+        $app['session']->setFlash('error', 'Die Abstimmung ist vorbei');
     }
     return $app->redirect('/abstimmen'.$get);
 });
