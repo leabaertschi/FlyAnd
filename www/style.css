@@ -69,7 +69,7 @@ a img {
 }
 
 .content > div {
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .content_bottom {
@@ -183,4 +183,9 @@ table.voting td {
 
 .success {
     color: #008000;
+}
+
+ol {
+    margin: 0;
+    margin-bottom: 15px;
 }
