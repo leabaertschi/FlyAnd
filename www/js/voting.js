@@ -29,11 +29,13 @@ var flyAnd = {};
                 $('#votingForm').submit();
             }
         });
-        ec = new evercookie();
-        // add item to localstorage if just voted
-        setVoted();
-        // check if this user already voted
-        checkVoted();
+        if ($('.voteRadio').size()) {
+            ec = new evercookie();
+            // add item to localstorage if just voted
+            setVoted();
+            // check if this user already voted
+            checkVoted();
+        }
     };
 
     setVoted = function() {

@@ -35,10 +35,10 @@
                         <div class="name">{{ film.name_2 }}</div>
                     </td>
                     <td class="radio">
+                        {% if not over %}
                         <div class="voteResult">
                             Stimmen: {% if votes[film.id] %}{{ votes[film.id] }}{%else%}0{% endif %}%
                         </div>
-                        {% if not over %}
                         <div class="voteRadio">
                             <input type="radio"
                                    name="film"
