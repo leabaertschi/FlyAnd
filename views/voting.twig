@@ -51,13 +51,15 @@
                 </tr>
             {% endfor %}
             </table>
-            <div class="captcha">{{ rc_code | raw }}</div>
-            <div class="clear"></div>
-            <div class="sendVote">
-                <div id="selectError" class="error hidden">Bitte wähle einen Film aus</div>
-                <a id="voteBtn" href="#">Abstimmen</a>
+            {% if not over %}
+                <div class="captcha">{{ rc_code | raw }}</div>
                 <div class="clear"></div>
-            </div>
+                <div class="sendVote">
+                    <div id="selectError" class="error hidden">Bitte wähle einen Film aus</div>
+                    <a id="voteBtn" href="#">Abstimmen</a>
+                    <div class="clear"></div>
+                </div>
+            {% endif %}
         </form>
     {% else %}
         <div>Vom 15.9. - 22.9.2011 findet ihr hier die Filme zum abstimmen.</div>

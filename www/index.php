@@ -14,7 +14,7 @@ $app['rc_public_key'] = '6Leh4ccSAAAAAMi846x5jbZgW9JfYwjunELh82bv';
 $app['rc_private_key'] = '6Leh4ccSAAAAACXTE2QJaFb9lZah919yzlbL8GyK';
 
 // session
-$app->register(new Silex\Extension\SessionExtension());
+//$app->register(new Silex\Extension\SessionExtension());
 
 // twig
 $app->register(new Silex\Extension\TwigExtension(), array(
