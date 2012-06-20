@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="style.css" />
-    <title>Fly & Film{% block title %}{% endblock %}</title>
+    <title>Fly & Dress{% block title %}{% endblock %}</title>
 </head>
 <body>
 <div id="content">
@@ -16,15 +16,11 @@
             {% include "navigation.twig" %}
         </div>
         <div class="content">
-            {# Flash message #}
-            {% for type, flash in app.session.getFlashes() %}
-                <div class="{{ type }}">{{ flash }}</div>
-            {% endfor %}
             {% block content %}
             {% endblock %}
         </div>
         <div class="content_bottom">&nbsp;</div>
-        <div class="footer">&copy; 2011 B&auml;rn Gliders</div>
+        <div class="footer">&copy; 2012 B&auml;rn Gliders</div>
     </div>
 </div>
 </body>
