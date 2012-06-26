@@ -13,7 +13,7 @@ li {
 
 a {
     text-decoration: none;
-    color: #003399;
+    color: #000;
 }
 
 a img {
@@ -21,7 +21,13 @@ a img {
 }
 
 h1 {
-    font-size: 3em;
+    font-size: 4em;
+    font-weight: normal;
+}
+
+h3 {
+    font-weight: normal;
+    font-size: 1.5em;
 }
 
 #content {
@@ -47,6 +53,16 @@ h1 {
 }
 
 .footer {
-    position: absolute;
-    bottom: 0;
+    margin-top: 165px;
+}
+
+.navi ul {
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.navi li {
+    display: inline;
+    font-size: 1.3em;
+    margin-right: 20px;
 }
