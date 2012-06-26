@@ -1,10 +1,14 @@
 body {
 /*	background-color: #cceeff;*/
-    font-size: 0.85em;
+    font-size: 0.9em;
     line-height: 1.5em;
-    font-family:  'Helvetica', Verdana, Arial, sans-serif;
+    font-family:  'Courier', serif;
   	padding: 30px;
   	margin:0;
+}
+
+li {
+    list-style: none;
 }
 
 a {
@@ -16,6 +20,10 @@ a img {
     border: none;
 }
 
+h1 {
+    font-size: 3em;
+}
+
 #content {
     width: 1097px;
 	padding: 0;
@@ -23,169 +31,22 @@ a img {
 }
 
 #middle {
-    margin: 0 200px;
+    min-height: 600px;
+    margin: 0 280px 0 200px;
+    background: url('img/dress/weiss_weiss.jpg') no-repeat right bottom;
 }
 
 #right {
     float: right;
     width: 200px;
-}
-
-#right .flyer {
-    margin-top: 70px;
-}
-
-#right div {
-    margin-left: 20px;
+    margin-top: 350px;
 }
 
 #right ul {
-    list-style: none;
     padding-left: 30px;
-    margin-top: 20px;
-}
-
-#right ul li {
-    margin-bottom: 15px;
-}
-
-.logo {
-    background-image: url(img/logo1_rounded.jpg);
-    background-repeat: no-repeat;
-    height: 150px;
-}
-
-.content {
-    min-height: 550px;
-    height:expression(this.scrollHeight > 550 ? "auto":"550px");
-    border: 1px solid #cccccc;
-    border-bottom: none;
-    padding: 20px 20px;
-}
-
-.content h1{
-    line-height: 1.2em;
-    font-size: 1.4em;
-}
-
-.content > div {
-    margin-bottom: 15px;
-}
-
-.content_bottom {
-    background: url(img/border_bottom.png) no-repeat;
-    height: 13px;
-}
-
-.navi {
-    height: 40px;
-    background-color: #eeeeee;
-    border: 1px solid #cccccc;
-    border-bottom: none;
-}
-
-.navi ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.navi ul li {
-    display: block;
-    float: left;
-    line-height: 35px;
-    padding: 5px 20px;
-}
-
-.navi ul li a {
-    font-size: 1.4em;
-    color: #999999;
-}
-
-.navi ul li.active a {
-    color: black;
-}
-
-.navi ul .contact {
-    float: right;
 }
 
 .footer {
-    color: gray;
-    padding: 5px;
-}
-
-.conditions li {
-    padding-bottom: 10px;
-}
-
-table.voting td {
-    padding-left: 10px;
-    vertical-align: top;
-}
-
-.voting .title {
-    font-size: 1.2em;
-    padding-bottom: 5px;
-}
-
-.voting .name {
-    font-size: .9em;
-}
-
-.captcha {
-    padding: 50px 20px 0 0;
-}
-
-#recaptcha_widget_div {
-    float: right;
-}
-
-.sendVote {
-    text-align: right;
-    padding: 20px 20px 0 0;
-}
-
-.sendVote a {
-    display: block;
-    background-color: #003399;
-    color: white;
-    font-weight: bold;
-    padding: 5px 10px;
-    width: 100px;
-    float: right;
-    text-align: center;
-}
-
-.voting label {
-    font-size: .8em;
-}
-
-.voting .radio {
-    padding-left: 50px;
-}
-
-.voteResult, .voteRadio {
-    display: none;
-}
-
-.error {
-    color: #FF0000;
-}
-
-.hidden {
-    display: none;
-}
-
-.clear {
-    clear: both;
-}
-
-.success {
-    color: #008000;
-}
-
-ol {
-    margin: 0;
-    margin-bottom: 15px;
+    position: absolute;
+    bottom: 0;
 }
