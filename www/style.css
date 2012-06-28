@@ -1,6 +1,5 @@
 body {
-/*	background-color: #cceeff;*/
-    font-size: 0.9em;
+    font-size: 1em;
     line-height: 1.5em;
     font-family:  'Courier', serif;
   	padding: 30px;
@@ -31,21 +30,23 @@ h3 {
 }
 
 #content {
-    width: 1097px;
+    width: 1200px;
 	padding: 0;
     margin: 0 auto;
 }
 
 #middle {
-    min-height: 600px;
-    margin: 0 280px 0 200px;
+    float: left;
+    min-height: 650px;
+    width: 750px;
     background: url('img/dress/weiss_weiss.jpg') no-repeat right bottom;
 }
 
 #right {
-    float: right;
+    float: left;
     width: 200px;
-    margin-top: 350px;
+    margin-left: 100px;
+    min-height: 600px;
 }
 
 #right ul {

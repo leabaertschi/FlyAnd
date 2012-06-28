@@ -3,13 +3,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="style.css" />
+    <!--[if IE]>
+        <link rel="stylesheet" href="ie.css" />
+    <![endif]-->
     <title>fly & dress{% block title %}{% endblock %}</title>
 </head>
 <body>
 <div id="content">
-    <div id="right">
-        {% include "right.twig" %}
-    </div>
     <div id="middle">
         <div class="navi">
             {% include "navigation.twig" %}
@@ -19,6 +19,9 @@
             {% endblock %}
         </div>
         <div class="footer">&copy; 2012 B&auml;rn Gliders</div>
+    </div>
+    <div id="right">
+        {% include "right.twig" %}
     </div>
 </div>
 </body>
