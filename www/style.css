@@ -11,7 +11,7 @@ li {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: underline;
     color: #000;
 }
 
@@ -68,6 +68,6 @@ h3 {
     margin-right: 20px;
 }
 
-h3 a {
-    text-decoration: underline;
+.navi li a {
+    text-decoration: none;
 }

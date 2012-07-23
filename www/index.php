@@ -36,6 +36,11 @@ $app->get('/', function() use ($app) {
     return $app['twig']->render('index.twig');
 });
 
+// infos
+$app->get('/infos', function() use ($app) {
+    return $app['twig']->render('infos.twig');
+});
+
 // competition
 //$app->get('/wettbewerb', function() use ($app) {
 //    return $app['twig']->render('competition.twig');
