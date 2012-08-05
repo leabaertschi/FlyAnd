@@ -42,8 +42,8 @@ $app->get('/infos', function() use ($app) {
 });
 
 // competition
-//$app->get('/wettbewerb', function() use ($app) {
-//    return $app['twig']->render('competition.twig');
-//});
+$app->get('/wettbewerb', function() use ($app) {
+    return $app['twig']->render('competition.twig');
+});
 
 $app->run();

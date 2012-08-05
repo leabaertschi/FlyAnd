@@ -71,3 +71,11 @@ h3 {
 .navi li a {
     text-decoration: none;
 }
+
+ul.conditions {
+    margin-top: 0px;
+}
+
+ul.conditions li {
+    list-style: circle;
+}
