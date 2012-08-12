@@ -53,6 +53,10 @@ h3 {
     padding-left: 30px;
 }
 
+#right li {
+    margin-bottom: 10px;
+}
+
 .footer {
     margin-top: 165px;
 }
